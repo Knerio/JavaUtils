@@ -4,6 +4,10 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write 
+
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
@@ -27,9 +31,7 @@ jobs:
         id: update_readme
         run: |
           LATEST_VERSION=${{ steps.get_latest_release.outputs.version }}
-          # Replace the version string in the Gradle dependency line
           sed -i "s/de\.derioo:javautils:[0-9]*\.[0-9]*\.[0-9]*/de.derioo:javautils:${LATEST_VERSION}/g" README.md
-          # Replace the version string in the Maven dependency line
           sed -i "s/<version>[0-9]*\.[0-9]*\.[0-9]*<\/version>/<version>${LATEST_VERSION}<\/version>/g" README.md
 
       - name: Commit Changes
