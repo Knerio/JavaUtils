@@ -36,8 +36,9 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git checkout -b update-readme-with-latest-version
           git add README.md
           git commit -m "Update README with latest version ${{ steps.get_latest_release.outputs.version }}"
-          git push
+          git push --force origin update-readme-with-latest-version:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
