@@ -28,11 +28,11 @@ tasks.register<Jar>("sourcesJar") {
 publishing {
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = URI("https://maven.pkg.github.com/Knerio/JavaUtils")
+            name = "Reposilite"
+            url = URI("https://nexus.derioo.de/releases")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = "admin"
+                password = System.getenv("REPOSILITE_TOKEN")
             }
         }
     }
