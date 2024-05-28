@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -23,7 +23,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = URI("https://maven.pkg.github.com/knerio/javautils")
+            url = URI("https://maven.pkg.github.com/Knerio/JavaUtils")
             credentials {
                 username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
