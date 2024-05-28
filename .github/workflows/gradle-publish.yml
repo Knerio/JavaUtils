@@ -41,5 +41,4 @@ jobs:
     - name: Publish to GitHub Packages
       run: gradle publish
       env:
-        GITHUB_ACTOR: ${{ github.actor }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPOSILITE_TOKEN: ${{secrets.REPOSILITE_TOKEN}}

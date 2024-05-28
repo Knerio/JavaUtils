@@ -1,0 +1,43 @@
+name: Update README with Latest Version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Get Latest Release Version
+        id: get_latest_release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const latestRelease = await github.rest.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            return { version: latestRelease.data.tag_name.replace(/^v/, '') };
+
+      - name: Update README.md
+        id: update_readme
+        run: |
+          LATEST_VERSION=${{ steps.get_latest_release.outputs.version }}
+          # Replace the version string in the Gradle dependency line
+          sed -i "s/de\.derioo:javautils:[0-9]*\.[0-9]*\.[0-9]*/de.derioo:javautils:${LATEST_VERSION}/g" README.md
+          # Replace the version string in the Maven dependency line
+          sed -i "s/<version>[0-9]*\.[0-9]*\.[0-9]*<\/version>/<version>${LATEST_VERSION}<\/version>/g" README.md
+
+      - name: Commit Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m "Update README with latest version ${{ steps.get_latest_release.outputs.version }}"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
