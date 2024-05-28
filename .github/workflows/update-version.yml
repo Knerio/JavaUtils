@@ -2,10 +2,10 @@ name: Update README with Latest Version
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 permissions:
-  contents: write  # Grant write permission to the contents
+  contents: write
 
 jobs:
   update-readme:
