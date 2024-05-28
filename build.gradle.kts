@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.0.3"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
@@ -36,7 +36,6 @@ publishing {
             artifactId = "javautils"
             version = "$version"
             from(components["java"])
-            artifact("build/libs/JavaUtils-$version.jar")
         }
     }
 }
