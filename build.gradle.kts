@@ -14,9 +14,15 @@ repositories {
 
 dependencies {
     implementation("org.projectlombok:lombok:1.18.32")
+    implementation("org.jetbrains:annotations:24.0.0")
+    implementation("org.jetbrains:annotations:24.0.0")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:3.22.0")
+}
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allJava)
 }
 
 publishing {
@@ -36,7 +42,7 @@ publishing {
             artifactId = "javautils"
             version = "$version"
             from(components["java"])
-            artifact("build/libs/JavaUtils-$version.jar")
+            artifact(tasks["sourcesJar"])
         }
     }
 }
