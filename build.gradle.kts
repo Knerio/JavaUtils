@@ -32,7 +32,11 @@ publishing {
     }
     publications {
         register<MavenPublication>("gpr") {
+            groupId = "$group"
+            artifactId = "javautils"
+            version = "$version"
             from(components["java"])
+            artifact("build/libs/JavaUtils-$version.jar")
         }
     }
 }
