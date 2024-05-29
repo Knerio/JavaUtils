@@ -15,6 +15,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,6 +37,12 @@ public class RequestUtilityTest {
         } catch (URISyntaxException | JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Test
+    public void testBuildURIWithParams() throws URISyntaxException {
+        URI uri = RequestUtility.buildUriWithParams("http://localhost:1080/testParams", Map.of("key1", "value1", "key2", "value2"));
+        assertThat(uri.toString()).isEqualTo("http://localhost:1080/testParams?key1=value1&key2=value2");
     }
 
 

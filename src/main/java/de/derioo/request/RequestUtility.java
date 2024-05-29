@@ -8,9 +8,11 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @UtilityClass
@@ -41,6 +43,23 @@ public class RequestUtility {
      */
     public @NotNull CompletableFuture<HttpResponse<String>> getJsonResponseAsync(HttpRequest.@NotNull Builder builder) {
         return CompletableFuture.supplyAsync(() -> getJsonResponse(builder));
+    }
+
+    /**
+     * Build a URI with query parameters
+     * @param baseUri the base URI
+     * @param queryParams the query parameters
+     * @return the URI with query parameters
+     * @throws URISyntaxException if URI syntax is incorrect
+     */
+    public URI buildUriWithParams(String baseUri, Map<String, String> queryParams) throws URISyntaxException {
+        StringBuilder uriBuilder = new StringBuilder(baseUri);
+        if (queryParams != null && !queryParams.isEmpty()) {
+            uriBuilder.append("?");
+            queryParams.forEach((key, value) -> uriBuilder.append(key).append("=").append(value).append("&"));
+            uriBuilder.deleteCharAt(uriBuilder.length() - 1);
+        }
+        return new URI(uriBuilder.toString());
     }
 
 }
