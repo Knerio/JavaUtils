@@ -14,6 +14,12 @@ import java.util.concurrent.CompletableFuture;
 
 public class RequestUtility {
 
+    /**
+     * Used to get a json response by a request builder <b>sync</b>
+     * @param builder the builder
+     * @return the response
+     * @see RequestUtility#getJsonResponseAsync(HttpRequest.Builder)
+     */
     public static HttpResponse<String> getJsonResponse(HttpRequest.@NotNull Builder builder) {
         try (
                 HttpClient client = HttpClient.newHttpClient();
@@ -25,6 +31,12 @@ public class RequestUtility {
         }
     }
 
+    /**
+     * Used to get a json response by a request builder <b>async</b>
+     * @param builder the builder
+     * @return the response
+     * @see RequestUtility#getJsonResponse(HttpRequest.Builder)
+     */
     public static @NotNull CompletableFuture<HttpResponse<String>> getJsonResponseAsync(HttpRequest.@NotNull Builder builder) {
         return CompletableFuture.supplyAsync(() -> getJsonResponse(builder));
     }
