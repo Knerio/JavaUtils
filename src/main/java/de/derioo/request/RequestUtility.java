@@ -1,6 +1,7 @@
 package de.derioo.request;
 
 import lombok.NoArgsConstructor;
+import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,6 +13,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
+@UtilityClass
 public class RequestUtility {
 
     /**
@@ -20,7 +22,7 @@ public class RequestUtility {
      * @return the response
      * @see RequestUtility#getJsonResponseAsync(HttpRequest.Builder)
      */
-    public static HttpResponse<String> getJsonResponse(HttpRequest.@NotNull Builder builder) {
+    public HttpResponse<String> getJsonResponse(HttpRequest.@NotNull Builder builder) {
         try (
                 HttpClient client = HttpClient.newHttpClient();
         ) {
@@ -37,7 +39,7 @@ public class RequestUtility {
      * @return the response
      * @see RequestUtility#getJsonResponse(HttpRequest.Builder)
      */
-    public static @NotNull CompletableFuture<HttpResponse<String>> getJsonResponseAsync(HttpRequest.@NotNull Builder builder) {
+    public @NotNull CompletableFuture<HttpResponse<String>> getJsonResponseAsync(HttpRequest.@NotNull Builder builder) {
         return CompletableFuture.supplyAsync(() -> getJsonResponse(builder));
     }
 

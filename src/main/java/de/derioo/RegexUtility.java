@@ -1,17 +1,20 @@
 package de.derioo;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.regex.Pattern;
 
 /**
  * Some (maybe) useful regexes
  */
+@UtilityClass
 public class RegexUtility {
 
     /**
      * Simple regex for a IPV4 Adress
      * for example '127.0.0.1'
      */
-    public static final Pattern IPV4_ADDRESS_PATTERN = Pattern.compile("^(?:(?:25[0-5]|2[0-4]\\d|1?\\d{1,2})(?:\\.(?!$)|$)){4}$");
+    public final Pattern IPV4_ADDRESS_PATTERN = Pattern.compile("^(?:(?:25[0-5]|2[0-4]\\d|1?\\d{1,2})(?:\\.(?!$)|$)){4}$");
 
     /**
      *
@@ -20,7 +23,7 @@ public class RegexUtility {
      *
      * @see NumberUtility
      */
-    public static final Pattern NUMERIC_PATTERN = Pattern.compile("^[+-]?(\\d{1,3}(,(\\d{3})?)+(\\.\\d+)?|(\\d*\\.)?\\d+)$");
+    public final Pattern NUMERIC_PATTERN = Pattern.compile("^[+-]?(\\d{1,3}(,(\\d{3})?)+(\\.\\d+)?|(\\d*\\.)?\\d+)$");
 
     /**
      *
@@ -29,6 +32,6 @@ public class RegexUtility {
      *
      * @see NumberUtility
      */
-    public static final Pattern INTEGER_PATTERN = Pattern.compile("^[+-]?[0-9]+$");
+    public final Pattern INTEGER_PATTERN = Pattern.compile("^[+-]?[0-9]+$");
 
 }

@@ -17,9 +17,9 @@ import java.util.regex.Pattern;
 @UtilityClass
 public class NumberUtility {
 
-    public static final NumberFormat DEFAULT_NUMBERFORMAT = NumberFormat.getNumberInstance();
+    public final NumberFormat DEFAULT_NUMBERFORMAT = NumberFormat.getNumberInstance();
 
-    public static final Map<String, Long> ABBREVATION_MAP = Map.of(
+    public final Map<String, Long> ABBREVATION_MAP = Map.of(
             "k", 1_000L,
             "m", 1_000_000L,
             "b", 1_000_000_000L,
