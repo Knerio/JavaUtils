@@ -42,7 +42,7 @@ public class RequestUtilityTest {
     @Test
     public void testBuildURIWithParams() throws URISyntaxException {
         URI uri = RequestUtility.buildUriWithParams("http://localhost:1080/testParams", Map.of("key1", "value1", "key2", "value2"));
-        assertThat(uri.toString()).isEqualTo("http://localhost:1080/testParams?key1=value1&key2=value2");
+        assertThat(uri.toString()).isIn("http://localhost:1080/testParams?key1=value1&key2=value2", "http://localhost:1080/testParams?key2=value2&key1=value1");
     }
 
 
