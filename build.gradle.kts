@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.4.0"
+version = "1.4.1"
 
 repositories {
     mavenCentral()
@@ -49,7 +49,6 @@ publishing {
             groupId = "$group"
             artifactId = "javautils"
             version = "$version"
-            from(components["java"])
             artifact(tasks["shadowJar"])
         }
     }
