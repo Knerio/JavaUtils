@@ -19,7 +19,7 @@ Repository (maven):
 Dependency (gradle):
 ```
 dependencies {
-  implementation("de.derioo:javautils:1.4.0")
+  implementation("de.derioo:javautils:1.4.1")
 }
 ```
 Dependency (maven):
@@ -28,7 +28,7 @@ Dependency (maven):
   <dependency>
     <groupId>de.derioo</groupId>
     <artifactId>javautils</artifactId>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     </dependency>
 </dependencies>
 ```
