@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.4.1"
+version = "1.4.2"
 
 repositories {
     mavenCentral()
@@ -59,6 +59,7 @@ tasks.test {
 }
 
 tasks.named<ShadowJar>("shadowJar") {
+    archiveClassifier.set("")
     relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
     relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
     relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
