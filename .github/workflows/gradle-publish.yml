@@ -34,7 +34,7 @@ jobs:
     - name: Test with Gradle
       run: gradle test
     - name: Build with Gradle
-      run: gradle build
+      run: gradle shadowJar
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
