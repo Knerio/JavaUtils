@@ -3,12 +3,12 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("io.github.goooler.shadow") version "8.1.7"
     `maven-publish`
 }
 
 group = "de.derioo"
-version = "1.3.2"
+version = "1.4.0"
 
 repositories {
     mavenCentral()
@@ -28,9 +28,9 @@ dependencies {
     testImplementation("org.projectlombok:lombok:1.18.32")
     testAnnotationProcessor("org.projectlombok:lombok:1.18.32")
 }
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allJava)
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
 publishing {
