@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.4.3"
+version = "1.4.4"
 
 repositories {
     mavenCentral()
@@ -67,11 +67,7 @@ tasks.named<ShadowJar>("shadowJar") {
     relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
 }
 
-tasks.named<ShadowJar>("sourcesJar") {
+tasks.register<Jar>("sourcesJar") {
     archiveClassifier.set("sources")
-    relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
-    relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
-    relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
-    relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
-    from(sourceSets.main.get().allSource)
+    from(sourceSets.main.get().allJava)
 }
