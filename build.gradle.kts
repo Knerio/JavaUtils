@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.4.2"
+version = "1.4.3"
 
 repositories {
     mavenCentral()
@@ -50,6 +50,7 @@ publishing {
             artifactId = "javautils"
             version = "$version"
             artifact(tasks["shadowJar"])
+            artifact(tasks["sourcesJar"])
         }
     }
 }
@@ -60,6 +61,14 @@ tasks.test {
 
 tasks.named<ShadowJar>("shadowJar") {
     archiveClassifier.set("")
+    relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
+    relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
+    relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
+    relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
+}
+
+tasks.named<ShadowJar>("sourcesJar") {
+    archiveClassifier.set("sources")
     relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
     relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
     relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
