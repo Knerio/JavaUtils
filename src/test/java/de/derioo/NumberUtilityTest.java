@@ -109,6 +109,13 @@ public class NumberUtilityTest {
         assertThat(format(1_000_000.12)).isEqualTo("1,000,000.12");
         assertThat(format(1_000_000.129999)).isEqualTo("1,000,000.13");
         assertThat(format(1_000_000.999999)).isEqualTo("1,000,001");
+
+        assertThat(format(-1)).isEqualTo("-1");
+        assertThat(format(-1.1)).isEqualTo("-1.1");
+        assertThat(format(-1_000_000)).isEqualTo("-1,000,000");
+        assertThat(format(-1_000_000.12)).isEqualTo("-1,000,000.12");
+        assertThat(format(-1_000_000.129999)).isEqualTo("-1,000,000.13");
+        assertThat(format(-1_000_000.999999)).isEqualTo("-1,000,001");
     }
 
     @Test
@@ -128,6 +135,23 @@ public class NumberUtilityTest {
         largeNum = 1_000_000_000_000L;
         formatted = formatLargeNumber(largeNum);
         assertThat(formatted).isEqualTo("1t");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(largeNum);
+
+        largeNum = -1_234L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("-1.23k");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(-1230L);
+        largeNum = -1_100_234L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("-1.1m");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(-1_100_000);
+        largeNum = -1_000_000_000L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("-1b");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(largeNum);
+        largeNum = -1_000_000_000_000L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("-1t");
         assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(largeNum);
     }
 }
