@@ -3,6 +3,9 @@ package de.derioo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.text.DecimalFormat;
+import java.util.Random;
+
 import static de.derioo.NumberUtility.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -98,4 +101,33 @@ public class NumberUtilityTest {
         assertThat(isNegativeNumber("1", true)).isFalse();
     }
 
+    @Test
+    public void testNumberFormat() {
+        assertThat(format(1)).isEqualTo("1");
+        assertThat(format(1.1)).isEqualTo("1.1");
+        assertThat(format(1_000_000)).isEqualTo("1,000,000");
+        assertThat(format(1_000_000.12)).isEqualTo("1,000,000.12");
+        assertThat(format(1_000_000.129999)).isEqualTo("1,000,000.13");
+        assertThat(format(1_000_000.999999)).isEqualTo("1,000,001");
+    }
+
+    @Test
+    public void testLargeNumberFormat() {
+        Long largeNum = 1_234L;
+        String formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("1.23k");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(1230L);
+        largeNum = 1_100_234L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("1.1m");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(1_100_000);
+        largeNum = 1_000_000_000L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("1b");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(largeNum);
+        largeNum = 1_000_000_000_000L;
+        formatted = formatLargeNumber(largeNum);
+        assertThat(formatted).isEqualTo("1t");
+        assertThat(getNumberByLargeNumberFormat(formatted)).isEqualTo(largeNum);
+    }
 }
