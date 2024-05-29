@@ -1,7 +1,9 @@
 import java.net.URI
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     id("java")
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     `maven-publish`
 }
 
@@ -48,7 +50,7 @@ publishing {
             artifactId = "javautils"
             version = "$version"
             from(components["java"])
-            artifact(tasks["sourcesJar"])
+            artifact(tasks["shadowJar"])
         }
     }
 }
@@ -57,3 +59,10 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.named<ShadowJar>("shadowJar") {
+    relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
+    relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
+    relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
+    relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
+    from(sourceSets.main.get().allSource)
+}
