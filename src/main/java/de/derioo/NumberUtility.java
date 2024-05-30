@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
 
-import static de.derioo.RegexUtility.LARGE_NUMBER_REGEX;
+import static de.derioo.RegexUtility.*;
 
 /**
  * Some useful methods for numbers
