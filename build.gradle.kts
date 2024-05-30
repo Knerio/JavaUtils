@@ -33,6 +33,19 @@ java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
 }
 
+tasks.named<ShadowJar>("shadowJar") {
+    archiveClassifier.set("")
+    relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
+    relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
+    relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
+    relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
+}
+
+tasks.register<Jar>("sourcesJar") {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allJava)
+}
+
 publishing {
     repositories {
         maven {
@@ -59,15 +72,3 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.named<ShadowJar>("shadowJar") {
-    archiveClassifier.set("")
-    relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
-    relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
-    relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
-    relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
-}
-
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allJava)
-}
