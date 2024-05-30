@@ -34,4 +34,11 @@ public class RegexUtility {
      */
     public final Pattern INTEGER_PATTERN = Pattern.compile("^[+-]?[0-9]+$");
 
+    /**
+     * Matches a Large Number format
+     * e.g. -100k, 200, 12m
+     * @see NumberUtility#formatLargeNumber(Long)
+     */
+    public final Pattern LARGE_NUMBER_REGEX = Pattern.compile("^[+-]?(\\d*)\\.?(\\d+)([kmbt]?)$");
+
 }
