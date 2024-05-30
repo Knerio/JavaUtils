@@ -269,7 +269,7 @@ public class NumberUtility {
     @AllArgsConstructor
     @Getter
     @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-    protected class AbbreviationEntry {
+    private class AbbreviationEntry {
 
         static final AbbreviationEntry one = new AbbreviationEntry("", 1);
         static final AbbreviationEntry thousand = new AbbreviationEntry("k", 1_000L);
@@ -278,7 +278,7 @@ public class NumberUtility {
         static final AbbreviationEntry trillion = new AbbreviationEntry("t", 1_000_000_000_000L);
 
 
-        protected static final AbbreviationEntry[] ABBREVATION_ENTRIES = new AbbreviationEntry[]{
+        private static final AbbreviationEntry[] ABBREVATION_ENTRIES = new AbbreviationEntry[]{
                 thousand,
                 million,
                 billion,
@@ -289,7 +289,7 @@ public class NumberUtility {
         long amount;
 
         @Contract(pure = true)
-        protected static @Nullable AbbreviationEntry getHighestAbbreviation(long number) {
+        private static @Nullable AbbreviationEntry getHighestAbbreviation(long number) {
             for (int i = 0; i < ABBREVATION_ENTRIES.length; i++) {
                 AbbreviationEntry entry = ABBREVATION_ENTRIES[i];
                 AbbreviationEntry next = i != ABBREVATION_ENTRIES.length - 1 ? ABBREVATION_ENTRIES[i + 1] : null;
@@ -300,7 +300,7 @@ public class NumberUtility {
             return null;
         }
 
-        protected static AbbreviationEntry getEntryByAbbreviation(String abbreviation, AbbreviationEntry fallback) {
+        private static AbbreviationEntry getEntryByAbbreviation(String abbreviation, AbbreviationEntry fallback) {
             for (AbbreviationEntry entry : ABBREVATION_ENTRIES) {
                 if (entry.abbreviation.equals(abbreviation)) return entry;
             }
