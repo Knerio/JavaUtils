@@ -12,7 +12,7 @@ repositories {
 Dependency (gradle):
 ```
 dependencies {
-  implementation("de.derioo:javautils:1.4.5")
+  implementation("de.derioo:javautils:1.4.6")
 }
 ```
 
