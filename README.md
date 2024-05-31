@@ -16,6 +16,7 @@ Repository (maven):
   </repository>
 </repositories>
 ```
+
 Dependency (gradle):
 ```
 dependencies {
