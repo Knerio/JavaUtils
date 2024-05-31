@@ -14,12 +14,11 @@ jobs:
      runs-on: ubuntu-latest
      steps:
        - name: Git checkout
-         uses: actions/checkout@v3
-       - name: File Sync
-         uses: netlify/file-sync-action@main
+         uses: actions/checkout@v4
+       - name: Run GitHub File Sync
+         uses: BetaHuhn/repo-file-sync-action@v1
          with:
-           files: '{"knerio/javautils#README.md": ".github/wiki/Home.md"}'
-           token: ${{ secrets.GITHUB_TOKEN }}
+           GH_PAT: ${{ secrets.GH_PAT }}
   wiki:
     needs: sync_files
     runs-on: ubuntu-latest
