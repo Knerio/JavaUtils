@@ -1,0 +1,15 @@
+name: Publish wiki
+on:
+  push:
+
+concurrency:
+  group: wiki
+  cancel-in-progress: true
+permissions:
+  contents: write
+jobs:
+  wiki:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: spenserblack/actions-wiki@0.3.0
