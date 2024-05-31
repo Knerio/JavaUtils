@@ -1,3 +1,3 @@
 # Contents
-  - [Instalation](../../wiki/installation)
+  - [Installation](../../wiki/installation)
 
