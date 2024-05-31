@@ -38,6 +38,6 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git checkout -b update-readme-with-latest-version
-          git add installation.md
+          git add .
           git commit -m "Update installation wiki file with latest version ${{ env.RELEASE_TAG }}"
           git push --force origin update-readme-with-latest-version:main
