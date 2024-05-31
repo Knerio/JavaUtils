@@ -12,19 +12,7 @@ permissions: write-all
 on:
   push:
 
-concurrency:
-  group: wiki
-  cancel-in-progress: true
-
 jobs:
-  update-wiki:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - uses: spenserblack/actions-wiki@<version>
-          with:
-            path: wiki
-    
   testAndBuild:
 
     runs-on: ubuntu-latest
