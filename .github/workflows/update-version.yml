@@ -24,7 +24,7 @@ jobs:
 
       - name: Update installation.md in wiki
         run: |
-          find . -maxdepth 2 -type d
+          find . -maxdepth 4
           LATEST_VERSION=${{ env.RELEASE_TAG }}
           # Replace the version string in the Gradle dependency line
           sed -i "s/de\.derioo:javautils:[0-9]*\.[0-9]*\.[0-9]*/de.derioo:javautils:${LATEST_VERSION}/g" installation.md
