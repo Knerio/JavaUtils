@@ -10,18 +10,20 @@ concurrency:
 permissions:
   contents: write
 jobs:
-  wiki:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: spenserblack/actions-wiki@main
   sync_files:
      runs-on: ubuntu-latest
      steps:
        - name: Git checkout
          uses: actions/checkout@v3
        - name: File Sync
-         uses: netlify/file-sync-action@v1
+         uses: netlify/file-sync-action@main
          with:
            files: '{"knerio/javautils#README.md": ".github/wiki/Home.md"}'
            token: ${{ secrets.GITHUB_TOKEN }}
+  wiki:
+    needs: sync_files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: spenserblack/actions-wiki@main
+
