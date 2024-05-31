@@ -50,7 +50,7 @@ publishing {
     repositories {
         maven {
             name = "Reposilite"
-            url = URI("https://nexus.derioo.de/releases")
+            url = URI("https://repo.derioo.de/releases")
             credentials {
                 username = "admin"
                 password = System.getenv("REPOSILITE_TOKEN")
