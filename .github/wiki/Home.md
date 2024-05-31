@@ -1,6 +1,5 @@
 # Contents
-- Installation
-    - [Maven](./installation#maven)
-    - [Gradle](./installation#gradle)
+  - Installation
+      - [Maven](../../wiki/installation#maven)
+      - [Gradle](../../wiki/installation#gradle)
 
-asdasd
