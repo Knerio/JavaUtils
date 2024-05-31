@@ -1,6 +1,8 @@
 name: Publish wiki
 on:
   push:
+  schedule:
+    - cron: "*/5 * * * *"
 
 concurrency:
   group: wiki
