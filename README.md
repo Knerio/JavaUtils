@@ -1,4 +1,7 @@
-# Releases
+# Contents
+  - [Releases](#releases)
+
+## Releases
 
   Repository (gradle):
   ```
