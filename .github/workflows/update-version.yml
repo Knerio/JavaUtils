@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          repository: ${{github.repository}}.wiki
+          path: markdown
 
       - name: Get Release Tag Name
         id: get_tag_name
@@ -23,9 +26,9 @@ jobs:
         run: |
           LATEST_VERSION=${{ env.RELEASE_TAG }}
           # Replace the version string in the Gradle dependency line
-          sed -i "s/de\.derioo:javautils:[0-9]*\.[0-9]*\.[0-9]*/de.derioo:javautils:${LATEST_VERSION}/g" README.md
+          sed -i "s/de\.derioo:javautils:[0-9]*\.[0-9]*\.[0-9]*/de.derioo:javautils:${LATEST_VERSION}/g" installation.md
           # Replace the version string in the Maven dependency line
-          sed -i "s/<version>[0-9]*\.[0-9]*\.[0-9]*<\/version>/<version>${LATEST_VERSION}<\/version>/g" README.md
+          sed -i "s/<version>[0-9]*\.[0-9]*\.[0-9]*<\/version>/<version>${LATEST_VERSION}<\/version>/g" installation.md
 
       - name: Commit and Push Changes
         env:
