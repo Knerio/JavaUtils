@@ -3,7 +3,7 @@ Releases will be published here:
 Repository (gradle):
 ```
 repositories {
-  maven("https://nexus.derioo.de/releases")
+  maven("https://repo.derioo.de/releases")
 }
 ```
 Repository (maven):
@@ -12,7 +12,7 @@ Repository (maven):
   <repository>
     <id>derio-releases</id>
     <name>Derios Repository</name>
-    <url>https://nexus.derioo.de/releases</url>
+    <url>https://repo.derioo.de/releases</url>
   </repository>
 </repositories>
 ```
