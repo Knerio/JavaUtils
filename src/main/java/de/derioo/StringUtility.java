@@ -21,7 +21,7 @@ public class StringUtility {
      * @param replacement the replacement
      * @return the modified string
      */
-    public String replaceLast(String s, String regex, String replacement) {
+    public String replaceLast(@NotNull String s, String regex, String replacement) {
         return s.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
     }
 
