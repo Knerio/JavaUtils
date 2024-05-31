@@ -19,6 +19,7 @@ jobs:
          uses: BetaHuhn/repo-file-sync-action@v1
          with:
            GH_PAT: ${{ secrets.GH_PAT }}
+           SKIP_PR: true
   wiki:
     needs: sync_files
     runs-on: ubuntu-latest
