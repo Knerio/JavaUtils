@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "de.derioo"
-version = "1.4.10"
+version = "1.4.11"
 
 repositories {
     mavenCentral()
