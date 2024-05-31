@@ -1,0 +1,3 @@
+user/repo:
+  - source: README.md
+    dest: .github/wiki/Home.md
