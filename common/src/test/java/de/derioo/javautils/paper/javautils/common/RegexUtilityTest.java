@@ -1,4 +1,4 @@
-package de.derioo.javautils.common;
+package de.derioo.javautils.paper.javautils.common;
 
 import org.junit.jupiter.api.Test;
 
