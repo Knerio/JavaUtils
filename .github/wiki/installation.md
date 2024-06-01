@@ -37,7 +37,7 @@ Dependency (maven):
   <dependency>
     <groupId>de.derioo.javautils</groupId>
     <artifactId>[subproject]</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.1</version>
     </dependency>
 </dependencies>
 ```
