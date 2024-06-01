@@ -1,14 +1,7 @@
-package de.derioo.request;
+package de.derioo.javautils.common.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.extern.jackson.Jacksonized;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.net.URI;

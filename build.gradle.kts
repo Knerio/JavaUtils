@@ -7,68 +7,74 @@ plugins {
     `maven-publish`
 }
 
-group = "de.derioo"
-version = "1.4.13"
+subprojects {
+    apply(plugin = "java")
+    apply(plugin = "io.github.goooler.shadow")
+    apply(plugin = "maven-publish")
 
-repositories {
-    mavenCentral()
-}
+    group = "de.derioo.javautils"
+    version = "1.4.13"
 
-dependencies {
-    implementation("com.fasterxml.jackson.core:jackson-core:2.17.1")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.1")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.17.1")
-    implementation("org.projectlombok:lombok:1.18.32")
-    annotationProcessor("org.projectlombok:lombok:1.18.32")
-    implementation("org.jetbrains:annotations:24.1.0")
-    implementation("org.jetbrains:annotations:24.1.0")
-    testImplementation(platform("org.junit:junit-bom:5.10.2"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.assertj:assertj-core:3.26.0")
-    testImplementation("org.projectlombok:lombok:1.18.32")
-    testAnnotationProcessor("org.projectlombok:lombok:1.18.32")
-}
-
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
-}
-
-tasks.named<ShadowJar>("shadowJar") {
-    archiveClassifier.set("")
-    relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
-    relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
-    relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
-    relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
-}
-
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allJava)
-}
-
-publishing {
     repositories {
-        maven {
-            name = "Reposilite"
-            url = URI("https://repo.derioo.de/releases")
-            credentials {
-                username = "admin"
-                password = System.getenv("REPOSILITE_TOKEN")
+        mavenCentral()
+    }
+
+    dependencies {
+        /** Annotations **/
+        implementation("org.projectlombok:lombok:1.18.32")
+        annotationProcessor("org.projectlombok:lombok:1.18.32")
+        implementation("org.jetbrains:annotations:24.1.0")
+        implementation("org.jetbrains:annotations:24.1.0")
+
+        /** Test dependencies **/
+        testImplementation(platform("org.junit:junit-bom:5.10.2"))
+        testImplementation("org.junit.jupiter:junit-jupiter")
+        testImplementation("org.assertj:assertj-core:3.26.0")
+        testImplementation("org.projectlombok:lombok:1.18.32")
+        testAnnotationProcessor("org.projectlombok:lombok:1.18.32")
+    }
+
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(21)
+    }
+
+    tasks.named<ShadowJar>("shadowJar") {
+        archiveClassifier.set("")
+        relocate("com.fasterxml.jackson", "de.derioo.shadow.jackson")
+        relocate("com.fasterxml.jackson.databind", "de.derioo.shadow.jackson.databind")
+        relocate("com.fasterxml.jackson.core", "de.derioo.shadow.jackson.core")
+        relocate("com.fasterxml.jackson.annotation", "de.derioo.shadow.jackson.annotation")
+    }
+
+    tasks.register<Jar>("sourcesJar") {
+        archiveClassifier.set("sources")
+        from(sourceSets.main.get().allJava)
+    }
+
+    publishing {
+        repositories {
+            maven {
+                name = "Reposilite"
+                url = URI("https://repo.derioo.de/releases")
+                credentials {
+                    username = "admin"
+                    password = System.getenv("REPOSILITE_TOKEN")
+                }
+            }
+        }
+        publications {
+            register<MavenPublication>("gpr") {
+                groupId = "$group"
+                version = "$version"
+                artifact(tasks["shadowJar"])
+                artifact(tasks["sourcesJar"])
             }
         }
     }
-    publications {
-        register<MavenPublication>("gpr") {
-            groupId = "$group"
-            artifactId = "javautils"
-            version = "$version"
-            artifact(tasks["shadowJar"])
-            artifact(tasks["sourcesJar"])
-        }
+
+    tasks.test {
+        useJUnitPlatform()
     }
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
 

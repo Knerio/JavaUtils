@@ -12,9 +12,11 @@ repositories {
 Dependency (gradle):
 ```
 dependencies {
-  implementation("de.derioo:javautils:1.4.13")
+  implementation("de.derioo.javautils:[sub-project]:1.4.13")
 }
 ```
+Available subprojects:
+- common
 
 # Maven
 
@@ -33,9 +35,12 @@ Dependency (maven):
 ```
 <dependencies>
   <dependency>
-    <groupId>de.derioo</groupId>
-    <artifactId>javautils</artifactId>
+    <groupId>de.derioo.javautils</groupId>
+    <artifactId>[subproject]</artifactId>
     <version>1.4.13</version>
     </dependency>
 </dependencies>
 ```
+
+Available subprojects:
+- common

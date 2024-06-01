@@ -1,4 +1,4 @@
-package de.derioo;
+package de.derioo.javautils.common;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,8 +11,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
-
-import static de.derioo.RegexUtility.*;
 
 /**
  * Some useful methods for numbers
@@ -239,9 +237,9 @@ public class NumberUtility {
      * @throws NumberFormatException if the provided format is not a malformed format
      */
     public Long getNumberByLargeNumberFormat(String formatted) throws NumberFormatException {
-        Matcher matcher = LARGE_NUMBER_REGEX.matcher(formatted);
+        Matcher matcher = RegexUtility.LARGE_NUMBER_REGEX.matcher(formatted);
         if (!matcher.matches())
-            throw new NumberFormatException("Given string isn't a formatted big number string! got: " + formatted + " needed: " + LARGE_NUMBER_REGEX.pattern());
+            throw new NumberFormatException("Given string isn't a formatted big number string! got: " + formatted + " needed: " + RegexUtility.LARGE_NUMBER_REGEX.pattern());
 
         boolean negative = String.valueOf(formatted.charAt(0)).equals("-");
 

@@ -1,13 +1,10 @@
-package de.derioo;
+package de.derioo.javautils.common;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
-import static de.derioo.RegexUtility.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.InstanceOfAssertFactories.INTEGER;
 
 public class RegexUtilityTest {
 
@@ -55,15 +52,15 @@ public class RegexUtilityTest {
     }
 
     public static boolean matchesIpV4(String s) {
-        return Pattern.matches(IPV4_ADDRESS_PATTERN.pattern(), s);
+        return Pattern.matches(RegexUtility.IPV4_ADDRESS_PATTERN.pattern(), s);
     }
 
     public static boolean matchesInteger(String s) {
-        return Pattern.matches(INTEGER_PATTERN.pattern(), s);
+        return Pattern.matches(RegexUtility.INTEGER_PATTERN.pattern(), s);
     }
 
     public static boolean matchesNumeric(String s) {
-        return Pattern.matches(NUMERIC_PATTERN.pattern(), s);
+        return Pattern.matches(RegexUtility.NUMERIC_PATTERN.pattern(), s);
     }
 
 }

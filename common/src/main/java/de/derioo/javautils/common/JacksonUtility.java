@@ -1,4 +1,4 @@
-package de.derioo;
+package de.derioo.javautils.common;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;

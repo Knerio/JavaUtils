@@ -1,4 +1,4 @@
-package de.derioo.request;
+package de.derioo.javautils.common.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

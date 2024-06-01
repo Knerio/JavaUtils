@@ -1,12 +1,9 @@
-package de.derioo.request;
+package de.derioo.javautils.common.request;
 
-import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
