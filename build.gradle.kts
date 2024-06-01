@@ -13,7 +13,7 @@ subprojects {
     apply(plugin = "maven-publish")
 
     group = "de.derioo.javautils"
-    version = "2.1.0"
+    version = "2.1.1"
 
     repositories {
         mavenCentral()

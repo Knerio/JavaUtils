@@ -12,7 +12,7 @@ repositories {
 Dependency (gradle):
 ```
 dependencies {
-  implementation("de.derioo.javautils:[sub-project]:1.4.13")
+  implementation("de.derioo.javautils:[subproject]:1.4.13")
 }
 ```
 Available subprojects:
