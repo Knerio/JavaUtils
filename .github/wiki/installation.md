@@ -17,6 +17,7 @@ dependencies {
 ```
 Available subprojects:
 - common
+- paper
 
 # Maven
 
@@ -44,3 +45,4 @@ Dependency (maven):
 
 Available subprojects:
 - common
+- paper
