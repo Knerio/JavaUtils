@@ -1,4 +1,4 @@
-package de.derioo.javautils.paper.javautils.common.request;
+package de.derioo.javautils.common.request;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

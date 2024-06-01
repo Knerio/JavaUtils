@@ -1,5 +1,6 @@
-package de.derioo.javautils.paper.javautils.common;
+package de.derioo.javautils.common;
 
+import de.derioo.javautils.paper.javautils.common.RegexUtility;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
