@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 @UtilityClass
-public class PaperUtility {
+public class MaterialUtility {
 
     public Material getRandomMaterial(Material[] materials) {
         List<Material> list = new ArrayList<>(List.of(materials));

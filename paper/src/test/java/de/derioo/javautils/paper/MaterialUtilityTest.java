@@ -5,11 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static de.derioo.javautils.paper.PaperUtility.*;
-import static org.assertj.core.api.Assertions.as;
+import static de.derioo.javautils.paper.MaterialUtility.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PaperUtilityTest {
+public class MaterialUtilityTest {
 
     static Random random = new Random();
 
