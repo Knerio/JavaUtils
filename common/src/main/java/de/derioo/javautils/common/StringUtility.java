@@ -1,4 +1,4 @@
-package de.derioo.javautils.paper.javautils.common;
+package de.derioo.javautils.common;
 
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;

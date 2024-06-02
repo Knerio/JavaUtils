@@ -3,7 +3,6 @@ package de.derioo.javautils.common;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.derioo.javautils.common.request.Response;
-import de.derioo.javautils.paper.javautils.common.JacksonUtility;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

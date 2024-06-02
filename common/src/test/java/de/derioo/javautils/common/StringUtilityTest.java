@@ -1,6 +1,5 @@
 package de.derioo.javautils.common;
 
-import de.derioo.javautils.paper.javautils.common.StringUtility;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
