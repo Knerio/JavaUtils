@@ -1,4 +1,4 @@
-global-commit-message: "Sync wiki files"  # Optional, defaults to "Sync GitHub files"
+commit-message: "Sync wiki files"  # Optional, defaults to "Sync GitHub files"
 entries:
   - from:
       repo: "Knerio/JavaUtils"
