@@ -1,6 +1,7 @@
 package de.derioo.javautils.paper;
 
 import org.bukkit.*;
+import org.bukkit.inventory.ItemStack;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

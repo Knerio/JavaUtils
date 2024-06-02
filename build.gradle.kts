@@ -2,6 +2,7 @@ import java.net.URI
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
+    id("com.tableau.modules.timeout-enforcer") version "2.0"
     id("java")
     id("io.github.goooler.shadow") version "8.1.7"
     `maven-publish`

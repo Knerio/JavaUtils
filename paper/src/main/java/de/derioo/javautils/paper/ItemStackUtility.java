@@ -69,6 +69,10 @@ public class ItemStackUtility {
      * @throws IOException any exception while reading
      */
     public ItemStack[] encodeItemStacksFromBytes(final byte[] encoded) throws IOException {
+        try {
+            return new ItemStack[]{ItemStack.deserializeBytes(encoded)};
+        } catch (Exception ignored) {}
+
         final ByteArrayInputStream stream = new ByteArrayInputStream(encoded);
         final int length = stream.read();
 
