@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
@@ -27,7 +28,7 @@ public class RequestUtilityTest {
             String body = response.body();
             assertThat(body).isNotNull();
             assertThat(mapper.readValue(body, Response.class)).isNotNull();
-        } catch (URISyntaxException | JsonProcessingException e) {
+        } catch (URISyntaxException | IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
     }

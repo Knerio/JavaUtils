@@ -1,5 +1,6 @@
 package de.derioo.javautils.common.request;
 
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,14 +22,10 @@ public class RequestUtility {
      * @return the response
      * @see RequestUtility#getJsonResponseAsync(HttpRequest.Builder)
      */
-    public HttpResponse<String> getJsonResponse(HttpRequest.@NotNull Builder builder) {
-        try (
-                HttpClient client = HttpClient.newHttpClient();
-        ) {
+    public HttpResponse<String> getJsonResponse(HttpRequest.@NotNull Builder builder) throws IOException, InterruptedException {
+        try (HttpClient client = HttpClient.newHttpClient()) {
             builder.header("Content-Type", "application/json");
             return client.send(builder.build(), HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -39,7 +36,13 @@ public class RequestUtility {
      * @see RequestUtility#getJsonResponse(HttpRequest.Builder)
      */
     public @NotNull CompletableFuture<HttpResponse<String>> getJsonResponseAsync(HttpRequest.@NotNull Builder builder) {
-        return CompletableFuture.supplyAsync(() -> getJsonResponse(builder));
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return getJsonResponse(builder);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     /**
