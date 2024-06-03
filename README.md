@@ -1,5 +1,5 @@
 # Contents
   - Installation
-      - [Maven](../../wiki/installation#maven)
-      - [Gradle](../../wiki/installation#gradle)
+      - [Maven](https://github.com/Knerio/JavaUtils/wiki/installation#maven)
+      - [Gradle](https://github.com/Knerio/JavaUtils/wiki/installation#gradle)
 
