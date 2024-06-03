@@ -1,8 +1,6 @@
 commit-message: "Sync wiki files"  # Optional, defaults to "Sync GitHub files"
 entries:
   - from:
-      repo: "Knerio/JavaUtils"
       file: "README.md"
     to:
-      repo: "Knerio/JavaUtils"
       file: ".github/wiki/Home.md"
