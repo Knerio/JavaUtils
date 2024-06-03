@@ -11,7 +11,7 @@ concurrency:
 permissions:
   contents: write
 jobs:
-  sync_files:
+  sync-files:
      runs-on: ubuntu-latest
      steps:
        - name: Git checkout
