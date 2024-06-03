@@ -1,6 +1,4 @@
 commit-message: "Sync wiki files"  # Optional, defaults to "Sync GitHub files"
 entries:
-  - from:
-      file: "README.md"
-    to:
-      file: ".github/wiki/Home.md"
+  - from: "README.md"
+    to: ".github/wiki/Home.md"
