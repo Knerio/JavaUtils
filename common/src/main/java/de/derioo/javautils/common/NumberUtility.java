@@ -244,7 +244,7 @@ public class NumberUtility {
         boolean negative = String.valueOf(formatted.charAt(0)).equals("-");
 
         double parsed = Double.parseDouble(matcher.group(1).isEmpty() ? matcher.group(2) : (matcher.group(1) + "." + matcher.group(2)));
-        return (long) (parsed * AbbreviationEntry.getEntryByAbbreviation(matcher.group(3), AbbreviationEntry.one).amount) * (negative ? -1L : 1L);
+        return (long) (parsed * AbbreviationEntry.getEntryByAbbreviation(matcher.group(3)).amount) * (negative ? -1L : 1L);
     }
 
     @Contract(pure = true)
@@ -276,7 +276,7 @@ public class NumberUtility {
         static final AbbreviationEntry trillion = new AbbreviationEntry("t", 1_000_000_000_000L);
 
 
-        private static final AbbreviationEntry[] ABBREVATION_ENTRIES = new AbbreviationEntry[]{
+        private static final AbbreviationEntry[] ABBREVIATION_ENTRIES = new AbbreviationEntry[]{
                 thousand,
                 million,
                 billion,
@@ -288,9 +288,9 @@ public class NumberUtility {
 
         @Contract(pure = true)
         private static @Nullable AbbreviationEntry getHighestAbbreviation(long number) {
-            for (int i = 0; i < ABBREVATION_ENTRIES.length; i++) {
-                AbbreviationEntry entry = ABBREVATION_ENTRIES[i];
-                AbbreviationEntry next = i != ABBREVATION_ENTRIES.length - 1 ? ABBREVATION_ENTRIES[i + 1] : null;
+            for (int i = 0; i < ABBREVIATION_ENTRIES.length; i++) {
+                AbbreviationEntry entry = ABBREVIATION_ENTRIES[i];
+                AbbreviationEntry next = i != ABBREVIATION_ENTRIES.length - 1 ? ABBREVIATION_ENTRIES[i + 1] : null;
                 if (next != null && next.amount <= number) continue;
                 if (entry.amount <= number) return entry;
 
@@ -298,11 +298,11 @@ public class NumberUtility {
             return null;
         }
 
-        private static AbbreviationEntry getEntryByAbbreviation(String abbreviation, AbbreviationEntry fallback) {
-            for (AbbreviationEntry entry : ABBREVATION_ENTRIES) {
+        private static AbbreviationEntry getEntryByAbbreviation(String abbreviation) {
+            for (AbbreviationEntry entry : ABBREVIATION_ENTRIES) {
                 if (entry.abbreviation.equals(abbreviation)) return entry;
             }
-            return fallback;
+            return AbbreviationEntry.one;
         }
 
     }
