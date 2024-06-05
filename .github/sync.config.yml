@@ -1,3 +1,4 @@
+type: short
 commit-message: "Sync wiki files"  # Optional, defaults to "Sync GitHub files"
 entries:
   - from: "README.md"
