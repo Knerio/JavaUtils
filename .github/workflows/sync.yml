@@ -17,7 +17,7 @@ jobs:
        - name: Git checkout
          uses: actions/checkout@v4
        - name: Run GitHub File Sync
-         uses: "knerio/GithubSyncFilesAction@main"
+         uses: "knerio/GithubSyncFilesAction@feat/config-system"
   wiki:
     needs: sync-files
     runs-on: ubuntu-latest
