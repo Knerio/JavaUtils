@@ -24,5 +24,8 @@ tasks {
         dependsOn(runServer)
         useJUnitPlatform()
     }
+    named<JavaCompile>("compileJava") {
+        dependsOn(project(":common").tasks.named<Jar>("shadowJar"))
+    }
 }
 
