@@ -12,9 +12,9 @@ dependencies {
     implementation(platform("org.junit:junit-bom:5.10.2"))
     implementation("org.junit.jupiter:junit-jupiter")
     implementation("org.assertj:assertj-core:3.26.0")
-    implementation("com.github.seeseemelk:MockBukkit-v1.20:3.9.0")
+    implementation("com.github.seeseemelk:MockBukkit-v1.20:3.89.0")
 
-    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.9.0")
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.89.0")
 }
 
 tasks {
