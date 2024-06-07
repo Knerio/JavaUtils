@@ -18,6 +18,13 @@ public class ItemStackUtilityTest extends CustomTest {
         byte[] bytes = decodeItemStacksToBytes(itemStacks);
         assertThat(bytes).isNotNull();
         assertThat(encodeItemStacksFromBytes(bytes)).isEqualTo(itemStacks);
+
+        String s = decodeItemStacksToString(itemStacks);
+        assertThat(s).isNotNull();
+        assertThat(encodeItemStacksFromString(s)).isEqualTo(itemStacks);
+
+        assertThat(encodeItemStacksFromBytes(new ItemStack(Material.DIRT).serializeAsBytes())[0]).isEqualTo(new ItemStack(Material.DIRT));
+
         assertThat(encodeItemStacksFromBytes(decodeItemStacksToBytes(new ItemStack[]{itemStacks[0]}))).isEqualTo(new ItemStack[]{itemStacks[0]});
     }
 
