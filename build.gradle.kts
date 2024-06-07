@@ -13,7 +13,7 @@ subprojects {
     apply(plugin = "maven-publish")
 
     group = "de.derioo.javautils"
-    version = "2.3.0"
+    version = "2.3.1"
 
     repositories {
         mavenCentral()
@@ -66,8 +66,8 @@ subprojects {
             register<MavenPublication>("gpr") {
                 groupId = "$group"
                 version = "$version"
-                artifact(tasks["shadowJar"])
-                artifact(tasks["sourcesJar"])
+                artifact(tasks.named<ShadowJar>("shadowJar").get())
+                artifact(tasks.named<Jar>("sourcesJar").get())
             }
         }
     }
@@ -75,6 +75,8 @@ subprojects {
     tasks.test {
         useJUnitPlatform()
     }
+
+    tasks.named("publishGprPublicationToReposiliteRepository") {
+        dependsOn(tasks.named("jar"))
+    }
 }
-
-
