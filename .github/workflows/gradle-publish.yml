@@ -34,8 +34,6 @@ jobs:
       uses: gradle/actions/setup-gradle@db19848a5fa7950289d3668fb053140cf3028d43 # v3.3.2
     - name: Test with Gradle
       run: gradle test
-    - name: Build with Gradle
-      run: gradle shadowJar
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
