@@ -1,15 +1,35 @@
 package de.derioo.javautils.paper;
 
+import be.seeseemelk.mockbukkit.MockBukkit;
+import be.seeseemelk.mockbukkit.ServerMock;
 import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.*;
 
+import static de.derioo.javautils.paper.ItemStackUtility.decodeItemStacksToBytes;
+import static de.derioo.javautils.paper.ItemStackUtility.encodeItemStacksFromBytes;
 import static de.derioo.javautils.paper.MaterialUtility.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MaterialUtilityTest {
+
+    private ServerMock server;
+    @BeforeEach
+    public void setUp()
+    {
+        server = MockBukkit.mock();
+    }
+
+    @AfterEach
+    public void tearDown()
+    {
+        MockBukkit.unmock();
+    }
 
     static Random random = new Random();
 
