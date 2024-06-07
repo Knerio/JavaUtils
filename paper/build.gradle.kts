@@ -12,9 +12,10 @@ dependencies {
     implementation(platform("org.junit:junit-bom:5.10.2"))
     implementation("org.junit.jupiter:junit-jupiter")
     implementation("org.assertj:assertj-core:3.26.0")
-    implementation("com.github.seeseemelk:MockBukkit-v1.20:3.9.0")
+    implementation("org.reflections:reflections:0.9.12")
 
-    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.9.0")
+    compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
+    testImplementation("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
 }
 
 tasks {
@@ -22,6 +23,7 @@ tasks {
         minecraftVersion("1.20.6")
     }
     test {
+        dependsOn("runServer")
         useJUnitPlatform()
     }
     named<JavaCompile>("compileJava") {
