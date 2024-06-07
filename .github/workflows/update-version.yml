@@ -37,3 +37,17 @@ jobs:
           git add .
           git commit -m "Update installation wiki file with latest version ${{ env.RELEASE_TAG }}"
           git push --force origin update-readme-with-latest-version:main
+  sync-files:
+    needs: update-readme
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v4
+      - name: Run GitHub File Sync
+        uses: "knerio/GithubSyncFilesAction@main"
+  wiki:
+    needs: sync-files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: spenserblack/actions-wiki@main
