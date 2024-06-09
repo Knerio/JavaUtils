@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import static de.derioo.javautils.common.DateUtility.*;
 import static org.assertj.core.api.Assertions.*;
+
 public class DateUtilityTest {
 
     @Test
@@ -19,9 +20,9 @@ public class DateUtilityTest {
 
     @Test
     public void testHoursAndMinutes() throws ParseException {
-         SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.GERMAN);
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.GERMAN);
         Date date = new Date(System.currentTimeMillis());
-        assertThat(parseHoursAndMinutes(format.format(date))).isEqualTo(date);
+        assertThat(parseHoursAndMinutes(format.format(date))).isCloseTo(date, 60000);
     }
 
     @Test
@@ -29,8 +30,8 @@ public class DateUtilityTest {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.GERMAN);
         SimpleDateFormat longFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.GERMAN);
         Date date = new Date(System.currentTimeMillis());
-        assertThat(parseDynamic(format.format(date))).isEqualTo(date);
-        assertThat(parseDynamic(format.format(longFormat))).isEqualTo(date);
+        assertThat(parseDynamic(format.format(date))).isCloseTo(date, 60000);
+        assertThat(parseDynamic(longFormat.format(date))).isCloseTo(date, 60000);
     }
 
 }
