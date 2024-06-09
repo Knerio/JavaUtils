@@ -16,7 +16,7 @@ public class DateUtilityTest {
     public void testDefault() throws ParseException {
         SimpleDateFormat longFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.GERMAN);
         Date date = new Date();
-        assertThat(parseDefaultTime(longFormat.format(date))).isEqualTo(date);
+        assertThat(parseDefaultTime(longFormat.format(date))).isCloseTo(date, 60000);
     }
 
     @Test
