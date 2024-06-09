@@ -14,8 +14,9 @@ public class DateUtilityTest {
 
     @Test
     public void testDefault() throws ParseException {
-        Date date = new Date(1717943040000L);
-        assertThat(parseDefaultTime("09.06.2024, 16:24:00")).isEqualTo(date);
+        SimpleDateFormat longFormat = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.GERMAN);
+        Date date = new Date();
+        assertThat(parseDefaultTime(longFormat.format(date))).isEqualTo(date);
     }
 
     @Test
