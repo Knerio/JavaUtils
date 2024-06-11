@@ -1,15 +1,15 @@
 package de.derioo.javautils.paper.test.custom;
 
-import de.derioo.javautils.paper.test.custom.annotation.MinecraftTest;
+import de.derioo.javautils.paper.test.custom.annotation.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class CustomTest {
 
-    public void testAll() {
+    public final void testAll() {
         for (Method declaredMethod : getClass().getDeclaredMethods()) {
-            if (!declaredMethod.isAnnotationPresent(MinecraftTest.class)) continue;
+            if (!declaredMethod.isAnnotationPresent(Test.class)) continue;
             try {
                 declaredMethod.setAccessible(true);
                 declaredMethod.invoke(this);

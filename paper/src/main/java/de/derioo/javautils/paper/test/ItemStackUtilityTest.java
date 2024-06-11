@@ -1,7 +1,7 @@
 package de.derioo.javautils.paper.test;
 
 import de.derioo.javautils.paper.test.custom.CustomTest;
-import de.derioo.javautils.paper.test.custom.annotation.MinecraftTest;
+import de.derioo.javautils.paper.test.custom.annotation.Test;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class ItemStackUtilityTest extends CustomTest {
 
-    @MinecraftTest
+    @Test
     private void testItemStackDecodingAndEncoding() throws IOException {
         ItemStack[] itemStacks = new ItemStack[]{new ItemStack(Material.DIAMOND), new ItemStack(Material.DIRT)};
         byte[] bytes = decodeItemStacksToBytes(itemStacks);

@@ -5,8 +5,7 @@ import de.derioo.javautils.paper.test.custom.CustomTest;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
-import org.reflections.scanners.TypeAnnotationsScanner;
+import org.reflections.scanners.Scanners;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
@@ -20,7 +19,7 @@ public class Main extends JavaPlugin {
         try {
             Reflections reflections = new Reflections(new ConfigurationBuilder()
                     .setUrls(ClasspathHelper.forPackage("de.derioo.javautils.paper.test"))
-                    .setScanners(new SubTypesScanner()));
+                    .setScanners(Scanners.SubTypes));
             reflections.getSubTypesOf(CustomTest.class).forEach(clazz -> {
                 try {
                     Duration took = MathUtility.computeTimeTaking(() -> {
