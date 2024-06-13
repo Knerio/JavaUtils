@@ -14,6 +14,7 @@ public class CustomTest {
                 declaredMethod.setAccessible(true);
                 declaredMethod.invoke(this);
             } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
                 throw new RuntimeException(e);
             }
         }
