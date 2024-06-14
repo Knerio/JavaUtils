@@ -1,11 +1,8 @@
 package de.derioo.javautils.paper.itembuilder;
 
-import com.google.common.base.Preconditions;
-import lombok.AllArgsConstructor;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Registry;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -17,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -142,6 +140,90 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
     public B lore(@NotNull Supplier<List<Component>> lore) {
         checkNotNull(lore, "lore");
         return lore(lore.get());
+    }
+
+    /**
+     * Replaces a lore if the given {@link Supplier} is true
+     * @param supplier the {@link Supplier}
+     * @param toAdd the lore
+     * @return this to make chain calls
+     * @see BaseItemBuilder#lore(Supplier)
+     */
+    public B loreIf(@NotNull Supplier<Boolean> supplier, Supplier<List<Component>> toAdd) {
+        checkNotNull(supplier, "supplier");
+        checkNotNull(toAdd, "lore");
+        if (!supplier.get()) return (B) this;
+        return lore(toAdd);
+    }
+
+    /**
+     * Adds a lore if the given {@link Supplier} is true
+     * @param supplier the {@link Supplier}
+     * @param toAdd the lore
+     * @return this to make chain calls
+     * @see BaseItemBuilder#lore(List)
+     */
+    public B loreIf(@NotNull Supplier<Boolean> supplier, List<Component> toAdd) {
+        checkNotNull(supplier, "supplier");
+        checkNotNull(toAdd, "lore");
+        if (!supplier.get()) return (B) this;
+        return lore(toAdd);
+    }
+
+    /**
+     * Adds a lore if the given {@link Supplier} is true
+     * @param supplier the {@link Supplier}
+     * @param toAdd the lore
+     * @return this to make chain calls
+     * @see BaseItemBuilder#lore(Component...)
+     */
+    public B loreIf(@NotNull Supplier<Boolean> supplier, Component... toAdd) {
+        checkNotNull(supplier, "supplier");
+        checkNotNull(toAdd, "lore");
+        if (!supplier.get()) return (B) this;
+        return lore(toAdd);
+    }
+
+    /**
+     * Adds a lore if the given {@link Supplier} is true
+     * @param supplier the {@link Supplier}
+     * @param toAdd the lore
+     * @return this to make chain calls
+     * @see BaseItemBuilder#addLore(Supplier)
+     */
+    public B addLoreIf(@NotNull Supplier<Boolean> supplier, Supplier<List<Component>> toAdd) {
+        checkNotNull(supplier, "supplier");
+        checkNotNull(toAdd, "lore");
+        if (!supplier.get()) return (B) this;
+        return addLore(toAdd);
+    }
+
+    /**
+     * Adds a lore if the given {@link Supplier} is true
+     * @param supplier the {@link Supplier}
+     * @param toAdd the lore
+     * @return this to make chain calls
+     * @see BaseItemBuilder#addLore(List)
+     */
+    public B addLoreIf(@NotNull Supplier<Boolean> supplier, List<Component> toAdd) {
+        checkNotNull(supplier, "supplier");
+        checkNotNull(toAdd, "lore");
+        if (!supplier.get()) return (B) this;
+        return addLore(toAdd);
+    }
+
+    /**
+     * Adds a lore if the given {@link Supplier} is true
+     * @param supplier the {@link Supplier}
+     * @param toAdd the lore
+     * @return this to make chain calls
+     * @see BaseItemBuilder#addLore(Component...)
+     */
+    public B addLoreIf(@NotNull Supplier<Boolean> supplier, Component... toAdd) {
+        checkNotNull(supplier, "supplier");
+        checkNotNull(toAdd, "lore");
+        if (!supplier.get()) return (B) this;
+        return addLore(toAdd);
     }
 
     /**

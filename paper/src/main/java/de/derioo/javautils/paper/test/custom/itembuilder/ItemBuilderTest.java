@@ -74,6 +74,27 @@ public class ItemBuilderTest extends CustomTest {
     }
 
     @Test
+    public void testLoreIfs() {
+        assertThat(new ItemBuilder(Material.DIRT).lore(Component.text("1")).addLoreIf(() -> true, Component.text("asd")).build())
+                .satisfies(item -> {
+                    assertThat(item.getItemMeta().lore().size()).isEqualTo(2);
+                });
+        assertThat(new ItemBuilder(Material.DIRT).lore(Component.text("1")).addLoreIf(() -> false, Component.text("asd")).build())
+                .satisfies(item -> {
+                    assertThat(item.getItemMeta().lore().size()).isEqualTo(1);
+                });
+
+        assertThat(new ItemBuilder(Material.DIRT).loreIf(() -> true, Component.text("a")).addLore(Component.text("asd")).build())
+                .satisfies(item -> {
+                    assertThat(item.getItemMeta().lore().size()).isEqualTo(2);
+                });
+        assertThat(new ItemBuilder(Material.DIRT).loreIf(() -> false, Component.text("a")).addLore(Component.text("asd")).build())
+                .satisfies(item -> {
+                    assertThat(item.getItemMeta().lore().size()).isEqualTo(1);
+                });
+    }
+
+    @Test
     public void testSkullBuilder() {
         assertThatNoException().isThrownBy(() -> new SkullBuilder(Material.ZOMBIE_WALL_HEAD));
         assertThatNoException().isThrownBy(() -> new SkullBuilder(Material.PLAYER_HEAD));
