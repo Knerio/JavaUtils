@@ -10,6 +10,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class ItemBuilderTest extends CustomTest {
@@ -112,7 +114,7 @@ public class ItemBuilderTest extends CustomTest {
                             .toString())
                             .isEqualTo("http://textures.minecraft.net/texture/de1b9989df62706560ebc1a1735994cac7130fc067c792cb3ec55449641fffbf");
                 });
-
+        assertThatNoException().isThrownBy(() -> new SkullBuilder(Material.PLAYER_HEAD).setSkullTextures(UUID.fromString("8bf2a212-ae78-4eeb-bc64-b18762c93350")).build());
     }
 
 }

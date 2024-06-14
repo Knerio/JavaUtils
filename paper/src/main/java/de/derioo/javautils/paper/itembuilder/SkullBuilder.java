@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.profile.PlayerTextures;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -82,6 +83,16 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
     public SkullBuilder owningPlayer(OfflinePlayer player) {
         checkNotNull(player, "player");
         return editMeta(meta -> meta.setOwningPlayer(player));
+    }
+
+    public SkullBuilder setSkullTextures(UUID uuid) {
+        PlayerProfile profile = Bukkit.createProfile(uuid);
+        profile.update().thenAccept(updated -> {
+            editMeta(skullMeta -> {
+               skullMeta.setPlayerProfile(updated);
+            });
+        });
+        return this;
     }
 
     /**
