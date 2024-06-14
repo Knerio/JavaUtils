@@ -95,6 +95,15 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
         return this;
     }
 
+    public SkullBuilder setSkullTexturesSync(UUID uuid) {
+        return editMeta(skullMeta -> {
+            PlayerProfile profile = Bukkit.createProfile(uuid);
+            profile.complete();
+            skullMeta.setPlayerProfile(profile);
+        });
+    }
+
+
     /**
      * Sets skull textures
      * @param texture the base64 decoded string
