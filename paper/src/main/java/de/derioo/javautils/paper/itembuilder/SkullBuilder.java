@@ -86,20 +86,8 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
     }
 
     public SkullBuilder setSkullTextures(UUID uuid) {
-        PlayerProfile profile = Bukkit.createProfile(uuid);
-        profile.update().thenAccept(updated -> {
-            editMeta(skullMeta -> {
-               skullMeta.setPlayerProfile(updated);
-            });
-        });
-        return this;
-    }
-
-    public SkullBuilder setSkullTexturesSync(UUID uuid) {
         return editMeta(skullMeta -> {
-            PlayerProfile profile = Bukkit.createProfile(uuid);
-            profile.complete();
-            skullMeta.setPlayerProfile(profile);
+           skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(uuid));
         });
     }
 
