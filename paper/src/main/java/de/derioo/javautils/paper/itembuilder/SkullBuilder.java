@@ -19,6 +19,7 @@ import java.net.URI;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -87,7 +88,11 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
 
     public SkullBuilder setSkullTextures(UUID uuid) {
         return editMeta(skullMeta -> {
-           skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(uuid));
+            try {
+                skullMeta.setPlayerProfile(Bukkit.createProfile(uuid).update().get());
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
 
