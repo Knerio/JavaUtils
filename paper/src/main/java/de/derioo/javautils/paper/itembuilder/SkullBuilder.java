@@ -104,7 +104,7 @@ public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
 
     /**
      * Sets skull textures
-     * @param texture the base64 decoded string
+     * @param texture the {@link Base64} decoded string
      * @return this to make chain calls
      */
     public SkullBuilder texture(String texture) {

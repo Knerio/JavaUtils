@@ -61,7 +61,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param displayname the displayname as a {@link Component}
      * @return this to make chain calls
      * @see ItemMeta#displayName(Component)
-     * @see BaseItemBuilder#name(Component)
+     * @see #name(Component)
      */
     public B displayname(Component displayname) {
         checkNotNull(displayname, "lore");
@@ -81,7 +81,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param name the displayname as a {@link Component}
      * @return this to make chain calls
      * @see ItemMeta#displayName(Component)
-     * @see BaseItemBuilder#displayname(Component)
+     * @see #displayname(Component)
      */
     public B name(Component name) {
         checkNotNull(name, "lore");
@@ -93,7 +93,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param name the displayname as a {@link Supplier<Component>}
      * @return this to make chain calls
      * @see ItemMeta#displayName(Component)
-     * @see BaseItemBuilder#displayname(Component)
+     * @see #displayname(Component)
      */
     public B name(Supplier<Component> name) {
         checkNotNull(name, "lore");
@@ -147,7 +147,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param supplier the {@link Supplier}
      * @param toAdd the lore
      * @return this to make chain calls
-     * @see BaseItemBuilder#lore(Supplier)
+     * @see #lore(Supplier)
      */
     public B loreIf(@NotNull Supplier<Boolean> supplier, Supplier<List<Component>> toAdd) {
         checkNotNull(supplier, "supplier");
@@ -161,7 +161,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param supplier the {@link Supplier}
      * @param toAdd the lore
      * @return this to make chain calls
-     * @see BaseItemBuilder#lore(List)
+     * @see #lore(List)
      */
     public B loreIf(@NotNull Supplier<Boolean> supplier, List<Component> toAdd) {
         checkNotNull(supplier, "supplier");
@@ -175,7 +175,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param supplier the {@link Supplier}
      * @param toAdd the lore
      * @return this to make chain calls
-     * @see BaseItemBuilder#lore(Component...)
+     * @see #lore(Component...)
      */
     public B loreIf(@NotNull Supplier<Boolean> supplier, Component... toAdd) {
         checkNotNull(supplier, "supplier");
@@ -189,7 +189,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param supplier the {@link Supplier}
      * @param toAdd the lore
      * @return this to make chain calls
-     * @see BaseItemBuilder#addLore(Supplier)
+     * @see #addLore(Supplier)
      */
     public B addLoreIf(@NotNull Supplier<Boolean> supplier, Supplier<List<Component>> toAdd) {
         checkNotNull(supplier, "supplier");
@@ -203,7 +203,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param supplier the {@link Supplier}
      * @param toAdd the lore
      * @return this to make chain calls
-     * @see BaseItemBuilder#addLore(List)
+     * @see #addLore(List)
      */
     public B addLoreIf(@NotNull Supplier<Boolean> supplier, List<Component> toAdd) {
         checkNotNull(supplier, "supplier");
@@ -217,7 +217,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      * @param supplier the {@link Supplier}
      * @param toAdd the lore
      * @return this to make chain calls
-     * @see BaseItemBuilder#addLore(Component...)
+     * @see #addLore(Component...)
      */
     public B addLoreIf(@NotNull Supplier<Boolean> supplier, Component... toAdd) {
         checkNotNull(supplier, "supplier");
@@ -318,7 +318,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
     /**
      * Lets the {@link ItemStack} glow (it gives it invisible {@link Enchantment#MENDING})
      * @return this to make chain calls
-     * @see BaseItemBuilder#glow(boolean)
+     * @see #glow(boolean)
      */
     public B glow() {
         return glow(true);
@@ -327,7 +327,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
     /**
      * Lets the {@link ItemStack} glow (it gives it invisible {@link Enchantment#MENDING})
      * @return this to make chain calls
-     * @see BaseItemBuilder#glow()
+     * @see #glow()
      */
     public B glow(boolean glow) {
         return editMeta(m -> {
@@ -386,7 +386,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
     /**
      * Remove <b>all</b> {@link Enchantment}s from the curren {@link ItemStack}
      * @return this to make chain calls
-     * @see BaseItemBuilder#disenchant(Enchantment)
+     * @see #disenchant(Enchantment)
      */
     public B disenchant() {
         return getMeta(m -> m.getEnchants().forEach((enchantment, integer) -> disenchant(enchantment)));
