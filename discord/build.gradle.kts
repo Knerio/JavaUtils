@@ -7,3 +7,9 @@ dependencies {
 
     implementation("com.cronutils:cron-utils:9.2.1")
 }
+
+tasks {
+    named<JavaCompile>("compileJava") {
+        mustRunAfter(project(":common").tasks.named<Jar>("shadowJar"))
+    }
+}

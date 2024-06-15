@@ -9,12 +9,14 @@ import de.derioo.javautils.common.StringUtility;
 import de.derioo.javautils.discord.command.CommandManager;
 import de.derioo.javautils.discord.command.annotations.Argument;
 import de.derioo.javautils.discord.command.annotations.Prefix;
+import de.derioo.javautils.discord.command.exception.CommandNotFoundException;
 import de.derioo.javautils.discord.command.parsed.ParsedCommand;
 import de.derioo.javautils.discord.command.parsed.parser.CronExtractor;
 import de.derioo.javautils.discord.command.parsed.parser.DateExtractor;
 import de.derioo.javautils.discord.command.reciever.ReceiveContext;
 import de.derioo.javautils.discord.command.reciever.Receiver;
 import kotlin.Pair;
+import kotlin.Triple;
 import lombok.extern.java.Log;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.Contract;
@@ -46,41 +48,33 @@ public class PrefixedReceiver extends Receiver<PrefixedReceiver, MessageReceived
                     return false;
                 String after = event.getMessage().getContentRaw().replaceFirst(command.getPrefix(), "").trim();
 
+
                 for (ParsedCommand.ParsedArgument argument : command.getArguments()) {
-                    Pair<Boolean, List<Object>> booleanListPair = checkIfArgumentCouldMatch(argument, after);
+                    Pair<Boolean, List<Object>> booleanListPair;
+                    try {
+                        booleanListPair = checkIfArgumentCouldMatch(argument, after);
+                    } catch (Exception e) {
+                        continue;
+                    }
+
                     args = booleanListPair.getSecond();
                     if (!booleanListPair.getFirst()) {
-                        break;
+                        continue;
                     }
-                    List<Object> parameters = new ArrayList<>();
+                    List<Object> params = new ArrayList<>();
                     int argumentsCount = 0;
                     for (Parameter parameter : argument.getMethod().getParameters()) {
                         if (parameter.isAnnotationPresent(Argument.class)) {
                             Object e = booleanListPair.getSecond().get(argumentsCount);
-                            parameters.add(e);
+                            params.add(e);
                             argumentsCount++;
-                            if (!parameter.getType().equals(e.getClass())) {
+                            if (!parameter.getType().isAssignableFrom(e.getClass())) {
                                 log.warning("Types dont match. Expected " + e.getClass());
                             }
                             continue;
                         }
-                    }
-                    try {
-                        argument.getMethod().setAccessible(true);
-                        argument.getMethod().invoke(command.getCommand(), parameters.toArray(Object[]::new));
-                    } catch (IllegalAccessException | InvocationTargetException e) {
-                        throw new RuntimeException(e);
-                    }
-                    return true;
-                }
-            } catch (Throwable e) {
-                try {
-                    Method method = command.getCommand().getClass().getDeclaredMethod("catcher");
-                    method.setAccessible(true);
-                    List<Object> params = new ArrayList<>();
-                    for (Parameter parameter : method.getParameters()) {
-                        if (parameter.getType().isInstance(Throwable.class)) {
-                            params.add(e);
+                        if (parameter.getType().isAssignableFrom(MessageReceivedEvent.class)) {
+                            params.add(event);
                             continue;
                         }
                         if (parameter.getType().isAssignableFrom(ReceiveContext.class)) {
@@ -89,14 +83,54 @@ public class PrefixedReceiver extends Receiver<PrefixedReceiver, MessageReceived
                         }
                         params.add(null);
                     }
-                    method.invoke(command.getCommand(), params.toArray(Object[]::new));
-                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
-                    throw new RuntimeException(ex);
+                    try {
+                        argument.getMethod().setAccessible(true);
+                        argument.getMethod().invoke(command.getCommand(), params.toArray(Object[]::new));
+                        return true;
+                    } catch (IllegalAccessException | InvocationTargetException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
-
+                defaultMethodCall(event, command, new CommandNotFoundException("Command not found"), args);
+            } catch (Throwable e) {
+                e.printStackTrace();
+                defaultMethodCall(event, command, e, args);
             }
         }
         return false;
+    }
+
+    private static void defaultMethodCall(MessageReceivedEvent event, ParsedCommand command, Throwable e, List<Object> args) {
+        try {
+            Method method = null;
+            for (Method declaredMethod : command.getCommand().getClass().getDeclaredMethods()) {
+                if (declaredMethod.getName().equals("defaultCommand")) {
+                    method = declaredMethod;
+                    break;
+                }
+            }
+            if (method == null) throw new RuntimeException(e);
+            method.setAccessible(true);
+            List<Object> params = new ArrayList<>();
+            for (Parameter parameter : method.getParameters()) {
+                if (parameter.getType().isAssignableFrom(Throwable.class)) {
+                    params.add(e);
+                    continue;
+                }
+                if (parameter.getType().isAssignableFrom(ReceiveContext.class)) {
+                    params.add(new ReceiveContext(command, args));
+                    continue;
+                }
+                if (parameter.getType().isAssignableFrom(MessageReceivedEvent.class)) {
+                    params.add(event);
+                    continue;
+                }
+                params.add(null);
+            }
+            method.invoke(command.getCommand(), params.toArray(Object[]::new));
+        } catch (InvocationTargetException | IllegalAccessException ex) {
+            throw new RuntimeException(ex);
+        }
     }
 
     @Contract("_, _ -> new")
