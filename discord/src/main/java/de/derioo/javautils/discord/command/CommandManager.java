@@ -33,7 +33,7 @@ public class CommandManager extends ListenerAdapter {
         for (ParsedCommand command : this.commands) {
             if (command.getReceiver() instanceof PrefixedReceiver prefixed) {
                 try {
-                    if (prefixed.receive(event)) {
+                    if (!prefixed.receive(event)) {
                         defaultMethodCall(event, command, new CommandNotFoundException("Command was not found"), prefixed.getArgs());
                     }
                 } catch (Throwable e) {
