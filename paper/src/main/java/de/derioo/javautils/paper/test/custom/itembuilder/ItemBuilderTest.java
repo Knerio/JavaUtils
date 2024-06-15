@@ -2,12 +2,16 @@ package de.derioo.javautils.paper.test.custom.itembuilder;
 
 import de.derioo.javautils.paper.itembuilder.ItemBuilder;
 import de.derioo.javautils.paper.itembuilder.SkullBuilder;
+import de.derioo.javautils.paper.itembuilder.firework.FireworkBuilder;
 import de.derioo.javautils.paper.test.custom.CustomTest;
 import de.derioo.javautils.paper.test.custom.annotation.Test;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.UUID;
@@ -115,6 +119,40 @@ public class ItemBuilderTest extends CustomTest {
                             .isEqualTo("http://textures.minecraft.net/texture/de1b9989df62706560ebc1a1735994cac7130fc067c792cb3ec55449641fffbf");
                 });
         assertThatNoException().isThrownBy(() -> new SkullBuilder(Material.PLAYER_HEAD).setSkullTextures(UUID.fromString("8bf2a212-ae78-4eeb-bc64-b18762c93350")).build());
+    }
+
+    @Test
+    public void testFireworkBuilder() {
+        assertThatThrownBy(() -> new FireworkBuilder(Material.DIRT)).isInstanceOf(IllegalArgumentException.class);
+        assertThatNoException().isThrownBy(() -> new FireworkBuilder(Material.FIREWORK_ROCKET));
+        assertThat(new FireworkBuilder()
+                .power(2)
+                .effects(
+                        FireworkEffect.builder()
+                                .withColor(Color.RED)
+                                .withFade(Color.GREEN)
+                                .flicker(true)
+                )
+                .build()).satisfies(itemStack -> {
+            FireworkMeta meta = (FireworkMeta) itemStack.getItemMeta();
+            assertThat(meta.getPower()).isEqualTo(2);
+            assertThat(meta.getEffects().get(0)).satisfies(fireworkEffect -> {
+                assertThat(fireworkEffect.getColors()).contains(Color.RED);
+                assertThat(fireworkEffect.getFadeColors()).contains(Color.GREEN);
+                assertThat(fireworkEffect.hasFlicker()).isTrue();
+            });
+        });
+        assertThat(new FireworkBuilder()
+                .effects(FireworkEffect.builder()
+                                .withColor(Color.RED),
+                        FireworkEffect.builder()
+                                .withColor(Color.GREEN)
+                )
+                .build())
+                .satisfies(itemStack -> {
+                    FireworkMeta meta = (FireworkMeta) itemStack.getItemMeta();
+                    assertThat(meta.getEffects().size()).isEqualTo(2);
+                });
     }
 
 }

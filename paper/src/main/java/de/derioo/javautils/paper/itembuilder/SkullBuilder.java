@@ -26,6 +26,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
 
+    /**
+     * Constructs a {@link SkullBuilder} with a default {@link Material#PLAYER_HEAD}
+     */
     public SkullBuilder() {
         super(Material.PLAYER_HEAD);
     }
