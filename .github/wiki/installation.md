@@ -18,6 +18,7 @@ dependencies {
 Available subprojects:
 - common
 - paper
+- discord
 
 # Maven
 
@@ -46,3 +47,4 @@ Dependency (maven):
 Available subprojects:
 - common
 - paper
+- discord
