@@ -2,7 +2,7 @@ package de.derioo.javautils.paper.test.custom.itembuilder;
 
 import de.derioo.javautils.paper.itembuilder.ItemBuilder;
 import de.derioo.javautils.paper.itembuilder.SkullBuilder;
-import de.derioo.javautils.paper.itembuilder.firework.FireworkBuilder;
+import de.derioo.javautils.paper.itembuilder.FireworkBuilder;
 import de.derioo.javautils.paper.test.custom.CustomTest;
 import de.derioo.javautils.paper.test.custom.annotation.Test;
 import net.kyori.adventure.text.Component;

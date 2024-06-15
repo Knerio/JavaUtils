@@ -1,6 +1,5 @@
-package de.derioo.javautils.paper.itembuilder.firework;
+package de.derioo.javautils.paper.itembuilder;
 
-import de.derioo.javautils.paper.itembuilder.BaseItemBuilder;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
