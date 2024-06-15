@@ -25,6 +25,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SkullBuilder extends BaseItemBuilder<SkullBuilder, SkullMeta> {
+
+    public SkullBuilder() {
+        super(Material.PLAYER_HEAD);
+    }
+
     /**
      * Constructs a new {@link SkullBuilder} based on an {@link ItemStack}
      * @param itemStack the {@link ItemStack}

@@ -3,6 +3,7 @@ package de.derioo.javautils.paper.test;
 import de.derioo.javautils.common.MathUtility;
 import de.derioo.javautils.paper.test.custom.CustomTest;
 import org.bukkit.Bukkit;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 import org.reflections.scanners.Scanners;
@@ -12,10 +13,20 @@ import org.reflections.util.ConfigurationBuilder;
 import java.time.Duration;
 import java.util.logging.Level;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        String unitTest = System.getenv("UNIT_TEST");
+        if (unitTest == null || !unitTest.equals("false")) {
+            runTests();
+            return;
+        }
+
+        Bukkit.getPluginManager().registerEvents(this, this);
+    }
+
+    private void runTests() {
         try {
             Reflections reflections = new Reflections(new ConfigurationBuilder()
                     .setUrls(ClasspathHelper.forPackage("de.derioo.javautils.paper.test"))
@@ -40,6 +51,7 @@ public class Main extends JavaPlugin {
             System.exit(1);
         }
         Bukkit.shutdown();
+        return;
     }
 
 }
