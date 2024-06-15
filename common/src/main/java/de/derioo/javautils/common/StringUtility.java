@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * This class adds some utility functions for strings
@@ -33,7 +34,10 @@ public class StringUtility {
      */
     public @NotNull String reverse(@NotNull String s) {
         return new StringBuilder(s).reverse().toString();
+    }
 
+    public String replaceFirst(String base, String matcher, String replacement) {
+        return base.replaceFirst(Pattern.quote(matcher), replacement);
     }
 
 }
