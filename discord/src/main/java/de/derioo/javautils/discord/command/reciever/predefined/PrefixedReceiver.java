@@ -1,14 +1,9 @@
 package de.derioo.javautils.discord.command.reciever.predefined;
 
 import com.cronutils.model.Cron;
-import com.cronutils.model.CronType;
-import com.cronutils.model.definition.CronDefinitionBuilder;
-import com.cronutils.parser.CronParser;
-import de.derioo.javautils.common.DateUtility;
 import de.derioo.javautils.common.StringUtility;
 import de.derioo.javautils.discord.command.CommandManager;
 import de.derioo.javautils.discord.command.annotations.Argument;
-import de.derioo.javautils.discord.command.annotations.Prefix;
 import de.derioo.javautils.discord.command.exception.CommandNotFoundException;
 import de.derioo.javautils.discord.command.parsed.ParsedCommand;
 import de.derioo.javautils.discord.command.parsed.parser.CronExtractor;
@@ -16,7 +11,6 @@ import de.derioo.javautils.discord.command.parsed.parser.DateExtractor;
 import de.derioo.javautils.discord.command.reciever.ReceiveContext;
 import de.derioo.javautils.discord.command.reciever.Receiver;
 import kotlin.Pair;
-import kotlin.Triple;
 import lombok.extern.java.Log;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.Contract;
@@ -25,7 +19,9 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,8 +40,7 @@ public class PrefixedReceiver extends Receiver<PrefixedReceiver, MessageReceived
             List<Object> args = new ArrayList<>();
             try {
                 if (!(command.getReceiver() instanceof PrefixedReceiver)) return false;
-                if (!event.getMessage().getContentRaw().startsWith(command.getPrefix()))
-                    return false;
+                if (!event.getMessage().getContentRaw().startsWith(command.getPrefix())) return false;
                 String after = event.getMessage().getContentRaw().replaceFirst(command.getPrefix(), "").trim();
 
 

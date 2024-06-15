@@ -35,8 +35,7 @@ public class ParsedCommand {
             receiver = new PrefixedReceiver(manager);
             this.prefix = clazz.getAnnotation(Prefix.class).value();
         }
-        for (Method declaredMethod : command.getClass()
-                .getDeclaredMethods()) {
+        for (Method declaredMethod : command.getClass().getDeclaredMethods()) {
             if (declaredMethod.isAnnotationPresent(SubCommand.class)) this.arguments.add(new ParsedArgument(declaredMethod));
         }
 

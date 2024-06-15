@@ -14,10 +14,8 @@ public class DateExtractor extends Extractor<Pair<String, Date>> {
         for (int i = 0; i < s.length(); i++) {
             try {
                 Pair<String, Date> tmp = new Pair<>(current.toString(), DateUtility.parseDynamic(current.toString()));
-                if (latest == null) {
-                    latest = tmp;
-                }
-                if (latest.getSecond().getTime() == tmp.getSecond().getTime() && !latest.getFirst().equals(tmp.getFirst())) {
+
+                if (latest != null && latest.getSecond().getTime() == tmp.getSecond().getTime() && !latest.getFirst().equals(tmp.getFirst())) {
                     return tmp;
                 }
                 latest = tmp;
