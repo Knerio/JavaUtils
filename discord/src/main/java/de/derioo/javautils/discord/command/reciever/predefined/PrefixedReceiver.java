@@ -12,10 +12,12 @@ import de.derioo.javautils.discord.command.annotations.Prefix;
 import de.derioo.javautils.discord.command.parsed.ParsedCommand;
 import de.derioo.javautils.discord.command.parsed.parser.CronExtractor;
 import de.derioo.javautils.discord.command.parsed.parser.DateExtractor;
+import de.derioo.javautils.discord.command.reciever.ReceiveContext;
 import de.derioo.javautils.discord.command.reciever.Receiver;
 import kotlin.Pair;
 import lombok.extern.java.Log;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
@@ -36,19 +38,18 @@ public class PrefixedReceiver extends Receiver<PrefixedReceiver, MessageReceived
 
     @Override
     public boolean receive(MessageReceivedEvent event) {
-        for (ParsedCommand command : getCommandManager()
-                .getCommands()) {
+        for (ParsedCommand command : getCommandManager().getCommands()) {
+            List<Object> args = new ArrayList<>();
             try {
                 if (!(command.getReceiver() instanceof PrefixedReceiver)) return false;
                 if (!event.getMessage().getContentRaw().startsWith(command.getPrefix()))
-                    return false; //TODO @Hello test 12:06
-                String after = event.getMessage().getContentRaw().replaceFirst(command.getPrefix(), "").trim(); //TODO test 12:06
+                    return false;
+                String after = event.getMessage().getContentRaw().replaceFirst(command.getPrefix(), "").trim();
 
-                boolean matches = true;
                 for (ParsedCommand.ParsedArgument argument : command.getArguments()) {
                     Pair<Boolean, List<Object>> booleanListPair = checkIfArgumentCouldMatch(argument, after);
+                    args = booleanListPair.getSecond();
                     if (!booleanListPair.getFirst()) {
-                        matches = false;
                         break;
                     }
                     List<Object> parameters = new ArrayList<>();
@@ -72,11 +73,23 @@ public class PrefixedReceiver extends Receiver<PrefixedReceiver, MessageReceived
                     }
                     return true;
                 }
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 try {
                     Method method = command.getCommand().getClass().getDeclaredMethod("catcher");
                     method.setAccessible(true);
-                    method.invoke(command.getCommand());
+                    List<Object> params = new ArrayList<>();
+                    for (Parameter parameter : method.getParameters()) {
+                        if (parameter.getType().isInstance(Throwable.class)) {
+                            params.add(e);
+                            continue;
+                        }
+                        if (parameter.getType().isAssignableFrom(ReceiveContext.class)) {
+                            params.add(new ReceiveContext(command, args));
+                            continue;
+                        }
+                        params.add(null);
+                    }
+                    method.invoke(command.getCommand(), params.toArray(Object[]::new));
                 } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -86,7 +99,8 @@ public class PrefixedReceiver extends Receiver<PrefixedReceiver, MessageReceived
         return false;
     }
 
-    private Pair<Boolean, List<Object>> checkIfArgumentCouldMatch(ParsedCommand.@NotNull ParsedArgument argument, String after) {
+    @Contract("_, _ -> new")
+    private @NotNull Pair<Boolean, List<Object>> checkIfArgumentCouldMatch(ParsedCommand.@NotNull ParsedArgument argument, String after) {
         boolean matches = true;
         List<Object> args = new ArrayList<>();
         String current = after;
