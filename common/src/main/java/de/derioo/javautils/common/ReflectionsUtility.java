@@ -18,11 +18,11 @@ public class ReflectionsUtility {
         return callMethod(method, instance, (o, parameter) -> true, args);
     }
 
-    public Object callMethod(@NotNull Method method, Object instance, List<Object> args) throws InvocationTargetException, IllegalAccessException {
+    public Object callMethod(@NotNull Method method, Object instance, @NotNull List<Object> args) throws InvocationTargetException, IllegalAccessException {
         return callMethod(method, instance, (o, parameter) -> true, args.toArray(Object[]::new));
     }
 
-    public Object callMethod(@NotNull Method method, Object instance, BiPredicate<Object, Parameter> matches, List<Object> args) throws InvocationTargetException, IllegalAccessException {
+    public Object callMethod(@NotNull Method method, Object instance, BiPredicate<Object, Parameter> matches, @NotNull List<Object> args) throws InvocationTargetException, IllegalAccessException {
         return callMethod(method, instance, matches, args.toArray(Object[]::new));
     }
 
