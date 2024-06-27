@@ -40,4 +40,10 @@ public class StringUtility {
         return base.replaceFirst(Pattern.quote(matcher), replacement);
     }
 
+    public String capAtNCharacters(@NotNull String toCap, int n) {
+        if (toCap.length() <= n) return toCap;
+        String s = toCap.substring(0, n - 3);
+        return s + "...";
+    }
+
 }

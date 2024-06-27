@@ -90,9 +90,17 @@ public class ItemBuilderTest extends CustomTest {
                     assertThat(item.getItemMeta().lore().size()).isEqualTo(1);
                 });
 
+        assertThat(new ItemBuilder(Material.DIRT).doIf(() -> true, (builder) -> builder.lore(Component.text("a"))).addLore(Component.text("asd")).build())
+                .satisfies(item -> {
+                    assertThat(item.getItemMeta().lore().size()).isEqualTo(2);
+                });
         assertThat(new ItemBuilder(Material.DIRT).loreIf(() -> true, Component.text("a")).addLore(Component.text("asd")).build())
                 .satisfies(item -> {
                     assertThat(item.getItemMeta().lore().size()).isEqualTo(2);
+                });
+        assertThat(new ItemBuilder(Material.DIRT).doIf(() -> false, (builder -> builder.lore(Component.text("a")))).addLore(Component.text("asd")).build())
+                .satisfies(item -> {
+                    assertThat(item.getItemMeta().lore().size()).isEqualTo(1);
                 });
         assertThat(new ItemBuilder(Material.DIRT).loreIf(() -> false, Component.text("a")).addLore(Component.text("asd")).build())
                 .satisfies(item -> {
@@ -136,7 +144,7 @@ public class ItemBuilderTest extends CustomTest {
                 .build()).satisfies(itemStack -> {
             FireworkMeta meta = (FireworkMeta) itemStack.getItemMeta();
             assertThat(meta.getPower()).isEqualTo(2);
-            assertThat(meta.getEffects().get(0)).satisfies(fireworkEffect -> {
+            assertThat(meta.getEffects().getFirst()).satisfies(fireworkEffect -> {
                 assertThat(fireworkEffect.getColors()).contains(Color.RED);
                 assertThat(fireworkEffect.getFadeColors()).contains(Color.GREEN);
                 assertThat(fireworkEffect.hasFlicker()).isTrue();

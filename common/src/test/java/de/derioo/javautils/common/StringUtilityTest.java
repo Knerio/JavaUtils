@@ -9,16 +9,22 @@ public class StringUtilityTest {
 
     @Test
     public void testReverse() {
-        Assertions.assertThat(StringUtility.reverse("123")).isEqualTo("321");
-        Assertions.assertThat(StringUtility.reverse("abc cde")).isEqualTo("edc cba");
+        assertThat(StringUtility.reverse("123")).isEqualTo("321");
+        assertThat(StringUtility.reverse("abc cde")).isEqualTo("edc cba");
     }
 
     @Test
     public void testReplaceLast() {
-        Assertions.assertThat(StringUtility.replaceLast("Test Test", "Test", "1")).isEqualTo("Test 1");
-        Assertions.assertThat(StringUtility.replaceLast("Test", "Test", "")).isEqualTo("");
-        Assertions.assertThat(StringUtility.replaceLast("1 2 3", "[0-9] [0-9]", "")).isEqualTo("1 ");
-        Assertions.assertThat(StringUtility.replaceLast("1 2 3", "[0-9]", "")).isEqualTo("1 2 ");
+        assertThat(StringUtility.replaceLast("Test Test", "Test", "1")).isEqualTo("Test 1");
+        assertThat(StringUtility.replaceLast("Test", "Test", "")).isEqualTo("");
+        assertThat(StringUtility.replaceLast("1 2 3", "[0-9] [0-9]", "")).isEqualTo("1 ");
+        assertThat(StringUtility.replaceLast("1 2 3", "[0-9]", "")).isEqualTo("1 2 ");
+    }
+
+    @Test
+    public void testCap() {
+        assertThat(StringUtility.capAtNCharacters("12345", 3)).isEqualTo("...");
+        assertThat(StringUtility.capAtNCharacters("12345678", 6)).isEqualTo("123...");
     }
 
 }

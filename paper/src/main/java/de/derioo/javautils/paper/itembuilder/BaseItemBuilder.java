@@ -19,6 +19,12 @@ import java.util.function.Supplier;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+/**
+ * This is the Baseclass of all {@link de.derioo.javautils.paper.itembuilder ItemBuilder}s
+ * To use this Class initialize one of the predefined {@link de.derioo.javautils.paper.itembuilder ItemBuilder}s
+ * @param <B> The <b>B</b>uilder wich the implementation returns
+ * @param <M> The <b>M</b>eta which {@link ItemMeta} the implementation uses
+ */
 @SuppressWarnings("unchecked")
 public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends ItemMeta> {
 
@@ -28,28 +34,28 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
     /**
      * See implementations
      */
-    public BaseItemBuilder(ItemStack itemStack) {
+    protected BaseItemBuilder(ItemStack itemStack) {
         checkNotNull(itemStack, "itemStack");
         this.itemStack = itemStack;
     }
     /**
      * See implementations
      */
-    public BaseItemBuilder(Material material) {
+    protected BaseItemBuilder(Material material) {
         checkNotNull(material, "material");
         this.itemStack = new ItemStack(material);
     }
     /**
      * See implementations
      */
-    public BaseItemBuilder(Material material, int amount) {
+    protected BaseItemBuilder(Material material, int amount) {
         checkNotNull(material, "material");
         this.itemStack = new ItemStack(material, amount);
     }
     /**
      * See implementations
      */
-    public BaseItemBuilder(Material material, int amount, ItemMeta meta) {
+    protected BaseItemBuilder(Material material, int amount, ItemMeta meta) {
         checkNotNull(material, "material");
         checkNotNull(material, "meta");
         this.itemStack = new ItemStack(material, amount);
@@ -384,7 +390,7 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
     }
 
     /**
-     * Remove <b>all</b> {@link Enchantment}s from the curren {@link ItemStack}
+     * Remove <b>all</b> {@link Enchantment}s from the current {@link ItemStack}
      * @return this to make chain calls
      * @see #disenchant(Enchantment)
      */
@@ -435,6 +441,22 @@ public abstract class BaseItemBuilder<B extends BaseItemBuilder<B, M>, M extends
      */
     public B amount(int amount) {
         this.itemStack.setAmount(amount);
+        return (B) this;
+    }
+
+    /**
+     * You can use this method to make a call to the itembuilder
+     * if a condition is true
+     * @param bool the {@link Predicate} to supply the condition
+     * @param action the action
+     * @return this t make chain calls
+     * @see #loreIf(Supplier, Component...)
+     */
+    public B doIf(Supplier<Boolean> bool, Consumer<B> action) {
+        checkNotNull(bool, "supplier");
+        checkNotNull(action, "action");
+        if (!bool.get()) return (B) this;
+        action.accept((B) this);
         return (B) this;
     }
 

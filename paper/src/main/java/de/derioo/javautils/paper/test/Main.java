@@ -2,6 +2,7 @@ package de.derioo.javautils.paper.test;
 
 import de.derioo.javautils.common.MathUtility;
 import de.derioo.javautils.paper.test.custom.CustomTest;
+import it.unimi.dsi.fastutil.objects.Object2ShortArrayMap;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,14 +12,15 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import java.time.Duration;
+import java.util.Objects;
 import java.util.logging.Level;
 
 public class Main extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        String unitTest = System.getenv("UNIT_TEST");
-        if (unitTest == null || !unitTest.equals("false")) {
+        String unitTest = Objects.requireNonNullElse(System.getenv("UNIT_TEST"), "true");
+        if (!unitTest.equals("false")) {
             runTests();
             return;
         }
