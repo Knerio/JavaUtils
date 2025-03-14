@@ -1,7 +1,7 @@
 dependencies {
     implementation(project(":common"))
 
-    implementation("org.assertj:assertj-core:3.26.0")
+    implementation("org.assertj:assertj-core:3.27.3")
 
     implementation("net.dv8tion:JDA:5.0.0-beta.24")
 

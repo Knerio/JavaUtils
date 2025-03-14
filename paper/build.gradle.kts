@@ -11,7 +11,7 @@ dependencies {
 
     implementation(platform("org.junit:junit-bom:5.10.2"))
     implementation("org.junit.jupiter:junit-jupiter")
-    implementation("org.assertj:assertj-core:3.26.0")
+    implementation("org.assertj:assertj-core:3.27.3")
     implementation("org.reflections:reflections:0.10.2")
 
     compileOnly("io.papermc.paper:paper-api:1.20.6-R0.1-SNAPSHOT")
