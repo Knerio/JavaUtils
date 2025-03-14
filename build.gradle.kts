@@ -27,7 +27,7 @@ subprojects {
         implementation("org.jetbrains:annotations:24.1.0")
 
         /** Test dependencies **/
-        testImplementation(platform("org.junit:junit-bom:5.10.2"))
+        testImplementation(platform("org.junit:junit-bom:5.12.1"))
         testImplementation("org.junit.jupiter:junit-jupiter")
         testImplementation("org.assertj:assertj-core:3.26.0")
         testImplementation("org.projectlombok:lombok:1.18.34")
