@@ -3,7 +3,7 @@ dependencies {
 
     implementation("org.assertj:assertj-core:3.26.0")
 
-    implementation("net.dv8tion:JDA:5.0.0-beta.24")
+    implementation("net.dv8tion:JDA:5.3.2")
 
     implementation("com.cronutils:cron-utils:9.2.1")
 }
